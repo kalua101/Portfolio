@@ -1,0 +1,211 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "category": "fullstack",
+      "title": "AddisFarmers.org",
+      "description": "Full-stack agricultural marketplace connecting Ethiopian farmers directly with urban buyers. Features real-time product management, multi-role authentication, order tracking, and admin dashboard with analytics.",
+      "technologies": [
+        "Next.js 16",
+        "FastAPI",
+        "PostgreSQL",
+        "TypeScript",
+        "Tailwind CSS",
+        "JWT Auth"
+      ],
+      "metrics": [
+        "🌾 Direct Farmer Market",
+        "🔐 Role-Based Access",
+        "📊 Real-time Analytics"
+      ],
+      "gradient": "from-emerald-500 via-lime-500 to-yellow-500",
+      "liveUrl": "https://next-js-1st-virid.vercel.app/",
+      "githubUrl": "#"
+    },
+    {
+      "id": 2,
+      "category": "fullstack",
+      "title": "E-Commerce Platform",
+      "description": "Modern e-commerce solution with real-time inventory management, secure payment processing, and advanced analytics dashboard.",
+      "technologies": [
+        "Next.js",
+        "Prisma",
+        "PostgreSQL",
+        "Tailwind"
+      ],
+      "metrics": [
+        "⚡ 50% faster load time",
+        "🚀 10k Active Users"
+      ],
+      "gradient": "from-purple-500 to-purple-700",
+      "liveUrl": "",
+      "githubUrl": ""
+    },
+    {
+      "id": 3,
+      "category": "backend",
+      "title": "RESTful API Gateway",
+      "description": "High-performance API gateway with rate limiting, caching, authentication, and comprehensive logging for microservices architecture.",
+      "technologies": [
+        "NestJS",
+        "Redis",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "metrics": [
+        "⚡ 1000 req/sec",
+        "📊 99.9% Uptime"
+      ],
+      "gradient": "from-pink-500 to-rose-600",
+      "liveUrl": "",
+      "githubUrl": ""
+    },
+    {
+      "id": 4,
+      "category": "frontend",
+      "title": "Design System Library",
+      "description": "Comprehensive design system with 50+ reusable components, dark mode support, and accessibility-first approach using Tailwind and shadcn/ui.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Tailwind",
+        "Storybook"
+      ],
+      "metrics": [
+        "🎨 50+ Components",
+        "♿ WCAG AA"
+      ],
+      "gradient": "from-cyan-500 to-blue-600",
+      "liveUrl": "",
+      "githubUrl": ""
+    },
+    {
+      "id": 5,
+      "category": "fullstack",
+      "title": "Task Management SaaS",
+      "description": "Collaborative task management platform with real-time updates, team workspaces, and advanced project tracking features.",
+      "technologies": [
+        "Next.js",
+        "Drizzle ORM",
+        "MongoDB",
+        "WebSocket"
+      ],
+      "metrics": [
+        "👥 5k Users",
+        "⚡ Real-time Sync"
+      ],
+      "gradient": "from-green-500 to-emerald-600",
+      "liveUrl": "",
+      "githubUrl": ""
+    },
+    {
+      "id": 6,
+      "category": "backend",
+      "title": "Authentication Service",
+      "description": "Secure authentication microservice with JWT, OAuth2, MFA support, and session management for enterprise applications.",
+      "technologies": [
+        "FastAPI",
+        "PostgreSQL",
+        "Redis",
+        "Docker"
+      ],
+      "metrics": [
+        "🔒 Enterprise Security",
+        "⚡ <1ms Response"
+      ],
+      "gradient": "from-orange-500 to-red-600",
+      "liveUrl": "",
+      "githubUrl": ""
+    },
+    {
+      "id": 7,
+      "category": "frontend",
+      "title": "Financial Dashboard",
+      "description": "Interactive financial analytics dashboard with real-time charts, data visualization, and customizable widgets for portfolio tracking.",
+      "technologies": [
+        "React",
+        "Chart.js",
+        "Tailwind",
+        "Zustand"
+      ],
+      "metrics": [
+        "📊 Live Data",
+        "⚡ 60fps Animations"
+      ],
+      "gradient": "from-indigo-500 to-purple-700",
+      "liveUrl": "",
+      "githubUrl": ""
+    }
+  ],
+  "techStack": [
+    {
+      "id": 1,
+      "title": "Frontend Development",
+      "technologies": [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS",
+        "HTML5",
+        "CSS3",
+        "JavaScript ES6+"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Backend & API",
+      "technologies": [
+        "FastAPI",
+        "Python",
+        "Node.js",
+        "REST API",
+        "JWT Authentication",
+        "OAuth2",
+        "SQLAlchemy"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Data Science & ML",
+      "technologies": [
+        "PyTorch",
+        "Machine Learning",
+        "Deep Learning",
+        "LSTM-GRU",
+        "Time Series Analysis",
+        "NumPy",
+        "Pandas"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Database & Storage",
+      "technologies": [
+        "PostgreSQL",
+        "SQL",
+        "Database Design"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "DevOps & Deployment",
+      "technologies": [
+        "Vercel",
+        "Render.com",
+        "Git",
+        "GitHub",
+        "CI/CD"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Tools & Practices",
+      "technologies": [
+        "VS Code",
+        "Chrome DevTools",
+        "Agile",
+        "RESTful Design"
+      ]
+    }
+  ]
+}
