@@ -18,27 +18,19 @@ export default function Contact() {
     setIsSubmitting(true);
     
     try {
-      // Save message to API
-      const response = await fetch('/api/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          timestamp: new Date().toISOString(),
-          id: Date.now(),
-        }),
-      });
+      const newMessage = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        id: Date.now(),
+      };
 
-      const result = await response.json();
-      
-      if (result.success) {
-        alert("✅ Thank you! Your message has been sent successfully.");
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        alert("❌ Failed to send message. Please try again.");
-      }
+      // Save to localStorage
+      const existingMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+      existingMessages.unshift(newMessage);
+      localStorage.setItem('contactMessages', JSON.stringify(existingMessages));
+
+      alert("✅ Thank you! Your message has been sent successfully.");
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       alert("❌ Failed to send message. Please try again.");

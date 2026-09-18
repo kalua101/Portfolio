@@ -862,37 +862,29 @@ function MessagesSection() {
     loadMessages();
   }, []);
 
-  const loadMessages = async () => {
+  const loadMessages = () => {
     try {
-      const response = await fetch('/api/messages');
-      const data = await response.json();
+      const data = JSON.parse(localStorage.getItem('contactMessages') || '[]');
       setMessages(data);
       setLoading(false);
     } catch (error) {
       console.error('Error loading messages:', error);
+      setMessages([]);
       setLoading(false);
     }
   };
 
-  const deleteMessage = async (id: number) => {
+  const deleteMessage = (id: number) => {
     if (!confirm('Are you sure you want to delete this message?')) {
       return;
     }
 
     try {
-      const response = await fetch('/api/messages', {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        setMessages(messages.filter(msg => msg.id !== id));
-        alert('✅ Message deleted successfully!');
-      } else {
-        alert('❌ Failed to delete message.');
-      }
+      const data = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+      const updatedMessages = data.filter((msg: any) => msg.id !== id);
+      localStorage.setItem('contactMessages', JSON.stringify(updatedMessages));
+      setMessages(updatedMessages);
+      alert('✅ Message deleted successfully!');
     } catch (error) {
       console.error('Error deleting message:', error);
       alert('❌ Error deleting message.');
