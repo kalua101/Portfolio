@@ -73,7 +73,7 @@ export default function AdminPage() {
 
         {/* Tabs */}
         <div className="flex gap-4 mb-8 overflow-x-auto">
-          {['profile', 'experience', 'projects', 'techstack'].map((tab) => (
+          {['profile', 'experience', 'projects', 'techstack', 'messages'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -94,6 +94,7 @@ export default function AdminPage() {
           {activeTab === 'experience' && <ExperienceSection />}
           {activeTab === 'projects' && <ProjectsSection />}
           {activeTab === 'techstack' && <TechStackSection />}
+          {activeTab === 'messages' && <MessagesSection />}
         </div>
       </div>
     </div>
@@ -846,6 +847,154 @@ function TechStackSection() {
       <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
         <p className="text-sm text-green-800 dark:text-green-200">
           <strong>✅ Auto-Save Enabled!</strong> Changes are saved to the database. Refresh the main page to see updates immediately!
+        </p>
+      </div>
+    </div>
+  );
+}
+
+
+function MessagesSection() {
+  const [messages, setMessages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = async () => {
+    try {
+      const response = await fetch('/api/messages');
+      const data = await response.json();
+      setMessages(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading messages:', error);
+      setLoading(false);
+    }
+  };
+
+  const deleteMessage = async (id: number) => {
+    if (!confirm('Are you sure you want to delete this message?')) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/messages', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setMessages(messages.filter(msg => msg.id !== id));
+        alert('✅ Message deleted successfully!');
+      } else {
+        alert('❌ Failed to delete message.');
+      }
+    } catch (error) {
+      console.error('Error deleting message:', error);
+      alert('❌ Error deleting message.');
+    }
+  };
+
+  const formatDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  if (loading) {
+    return <div className="text-center py-8">Loading messages...</div>;
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Contact Messages</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            {messages.length} message{messages.length !== 1 ? 's' : ''} received
+          </p>
+        </div>
+        <button
+          onClick={loadMessages}
+          className="px-4 py-2 card-surface rounded-lg font-semibold hover:border-accent-primary transition-smooth"
+        >
+          Refresh
+        </button>
+      </div>
+
+      {messages.length === 0 ? (
+        <div className="text-center py-12 card-surface rounded-xl">
+          <Mail className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-600 dark:text-gray-400 text-lg">No messages yet</p>
+          <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">
+            Messages from your contact form will appear here
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className="p-6 bg-white dark:bg-white/5 border-2 border-gray-200 dark:border-white/10 rounded-xl hover:border-accent-primary transition-smooth"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                      {message.name}
+                    </h3>
+                    <span className="px-2 py-1 bg-accent-primary/10 text-accent-primary text-xs font-medium rounded-md">
+                      {message.subject}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <Mail className="w-4 h-4" />
+                      {message.email}
+                    </span>
+                    <span>{formatDate(message.timestamp)}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => deleteMessage(message.id)}
+                  className="p-2 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-smooth"
+                  title="Delete message"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-4 bg-gray-50 dark:bg-black/20 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                  {message.message}
+                </p>
+              </div>
+
+              <div className="mt-4 flex gap-2">
+                <a
+                  href={`mailto:${message.email}?subject=Re: ${encodeURIComponent(message.subject)}`}
+                  className="px-4 py-2 bg-gradient-to-r from-accent-primary to-accent-secondary text-white rounded-lg font-semibold hover:shadow-lg transition-smooth text-sm"
+                >
+                  Reply via Email
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+        <p className="text-sm text-blue-800 dark:text-blue-200">
+          <strong>📧 How it works:</strong> When someone fills out the contact form on your website, their message is saved here. You can view all messages and reply directly via email!
         </p>
       </div>
     </div>

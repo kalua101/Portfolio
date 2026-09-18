@@ -12,41 +12,36 @@ export default function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
     
     try {
-      // Using Web3Forms (free service)
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Save message to API
+      const response = await fetch('/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // You'll need to get this from web3forms.com
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to: 'kaleabt06@gmail.com',
+          ...formData,
+          timestamp: new Date().toISOString(),
+          id: Date.now(),
         }),
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+      const result = await response.json();
+      
+      if (result.success) {
         alert("✅ Thank you! Your message has been sent successfully.");
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        setSubmitStatus('error');
-        alert("❌ Something went wrong. Please try emailing me directly at kaleabt06@gmail.com");
+        alert("❌ Failed to send message. Please try again.");
       }
     } catch (error) {
-      setSubmitStatus('error');
-      alert("❌ Failed to send message. Please email me directly at kaleabt06@gmail.com");
+      console.error('Error:', error);
+      alert("❌ Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -55,7 +50,6 @@ export default function Contact() {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/kalua101', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/kaleabtemesgen-0a62343a5', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:kaleabt06@gmail.com', label: 'Email' },
   ];
 
   return (
