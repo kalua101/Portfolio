@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { Upload, Plus, Trash2, Save, Image as ImageIcon, Crop, X } from 'lucide-react';
+import { Upload, Plus, Trash2, Save, Image as ImageIcon, Crop, X, Mail } from 'lucide-react';
 import Cropper from 'react-easy-crop';
 
 // Type definitions for react-easy-crop
