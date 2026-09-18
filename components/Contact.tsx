@@ -11,29 +11,45 @@ export default function Contact() {
     message: '',
   });
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    
-    // Create email body with form data
-    const emailBody = `
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-Message:
-${formData.message}
-    `.trim();
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
     
-    // Create mailto link with form data
-    const mailtoLink = `mailto:kaleabt06@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Clear form after a short delay
-    setTimeout(() => {
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 500);
+    try {
+      // Using Web3Forms (free service)
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // You'll need to get this from web3forms.com
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to: 'kaleabt06@gmail.com',
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        alert("✅ Thank you! Your message has been sent successfully.");
+      } else {
+        setSubmitStatus('error');
+        alert("❌ Something went wrong. Please try emailing me directly at kaleabt06@gmail.com");
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      alert("❌ Failed to send message. Please email me directly at kaleabt06@gmail.com");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const socialLinks = [
@@ -122,9 +138,10 @@ ${formData.message}
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-accent-primary to-accent-secondary text-white rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-smooth"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-accent-primary to-accent-secondary text-white rounded-xl font-semibold hover:shadow-xl hover:-translate-y-1 transition-smooth disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Send Message</span>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
                 <Send className="w-5 h-5" />
               </button>
             </form>
