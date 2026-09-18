@@ -179,7 +179,7 @@ npm run lint
 
 ## 📧 Contact
 
-- **Email**: kaleabtemesgen@icloud.com
+- **Email**: kaleabt06@gmail.com
 - **GitHub**: [github.com/kalua101](https://github.com/kalua101)
 - **LinkedIn**: [linkedin.com/in/kaleabtemesgen-0a62343a5](https://www.linkedin.com/in/kaleabtemesgen-0a62343a5)
 - **Location**: Addis Ababa, Ethiopia

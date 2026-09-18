@@ -22,7 +22,7 @@ export default function Contact() {
   const socialLinks = [
     { icon: Github, href: 'https://github.com/kalua101', label: 'GitHub' },
     { icon: Linkedin, href: 'https://www.linkedin.com/in/kaleabtemesgen-0a62343a5', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:kaleabtemesgen@icloud.com', label: 'Email' },
+    { icon: Mail, href: 'mailto:kaleabt06@gmail.com', label: 'Email' },
   ];
 
   return (
@@ -135,8 +135,8 @@ export default function Contact() {
                 </div>
                 <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
                   <Mail className="w-5 h-5 text-accent-primary" />
-                  <a href="mailto:kaleabtemesgen@icloud.com" className="hover:text-accent-primary transition-colors">
-                    kaleabtemesgen@icloud.com
+                  <a href="mailto:kaleabt06@gmail.com" className="hover:text-accent-primary transition-colors">
+                    kaleabt06@gmail.com
                   </a>
                 </div>
               </div>
