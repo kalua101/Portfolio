@@ -3,7 +3,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Upload, Plus, Trash2, Save, Image as ImageIcon, Crop, X } from 'lucide-react';
 import Cropper from 'react-easy-crop';
-import { Point, Area } from 'react-easy-crop/types';
+
+// Type definitions for react-easy-crop
+type Point = { x: number; y: number };
+type Area = { x: number; y: number; width: number; height: number };
 
 export default function AdminPage() {
   const [password, setPassword] = useState('');
@@ -820,7 +823,7 @@ function TechStackSection() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {category.technologies.map((tech, techIndex) => (
+            {category.technologies.map((tech: string, techIndex: number) => (
               <span
                 key={techIndex}
                 className="px-3 py-1 bg-accent-primary/10 text-accent-primary text-xs font-medium rounded-md"
