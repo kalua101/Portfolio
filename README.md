@@ -1,140 +1,194 @@
-# Next.js Portfolio - Setup Instructions
+# Kaleab Temesgen - Portfolio Website
 
-## 🚀 Quick Start
+Modern, responsive portfolio website built with Next.js, featuring an admin panel for easy content management.
 
-Your Next.js portfolio has been partially set up. To complete the installation:
+## 🚀 Features
 
-### 1. Install Dependencies
+- **✨ Modern Design**: Clean, professional interface with dark/light mode toggle
+- **🎨 Pink/Rainbow Theme**: Beautiful gradient borders and backgrounds in light mode
+- **📱 Fully Responsive**: Optimized for mobile, tablet, and desktop
+- **🎬 Smooth Animations**: Scroll-triggered animations with IntersectionObserver
+- **⚙️ Admin Panel**: Edit profile, projects, experience, and tech stack without code
+- **💾 Auto-Save System**: All changes automatically saved to JSON file
+- **🖼️ Profile Upload**: Upload and crop profile pictures directly from admin
+- **🔒 Password Protected**: Secure admin access
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Image Cropping**: react-easy-crop
+- **Font**: Inter (Google Fonts)
+
+## 📦 Installation
 
 ```bash
-cd c:\Users\hp\OneDrive\Desktop\portfolio-nextjs
+# Clone the repository
+git clone https://github.com/kalua101/Portfolio.git
+
+# Navigate to project directory
+cd portfolio-nextjs
+
+# Install dependencies
 npm install
-```
 
-### 2. Run Development Server
-
-```bash
+# Run development server
 npm run dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) to view the website.
 
-### 3. Build for Production
+## 🎯 Quick Start
 
-```bash
-npm run build
-npm start
-```
+### View Portfolio
+Visit the homepage to see all sections:
+- Hero with profile picture and intro
+- About section
+- Tech Stack & Ecosystem
+- Featured Projects
+- Professional Experience
+- Contact information
+
+### Access Admin Panel
+1. Navigate to `/admin`
+2. Enter password: `kaleab2024`
+3. Edit content in 4 tabs:
+   - **Profile**: Update bio, upload profile picture
+   - **Experience**: Add/edit work experience
+   - **Projects**: Manage project showcase
+   - **Tech Stack**: Update technology categories
+
+All changes auto-save instantly!
 
 ## 📁 Project Structure
 
 ```
 portfolio-nextjs/
 ├── app/
-│   ├── layout.tsx          # Root layout with theme provider
-│   ├── page.tsx            # Main page component
-│   └── globals.css         # Global styles & Tailwind
+│   ├── admin/
+│   │   └── page.tsx           # Admin dashboard
+│   ├── api/
+│   │   ├── portfolio/
+│   │   │   └── route.ts       # GET/POST portfolio data
+│   │   └── upload/
+│   │       └── route.ts       # Profile picture upload
+│   ├── layout.tsx             # Root layout
+│   ├── page.tsx               # Main portfolio page
+│   └── globals.css            # Global styles
 ├── components/
-│   ├── ThemeProvider.tsx   # Dark/Light mode context
-│   ├── Navigation.tsx      # Sticky navbar ✅
-│   ├── Hero.tsx           # Hero section (needs creation)
-│   ├── About.tsx          # About section (needs creation)
-│   ├── TechStack.tsx      # Tech stack grid (needs creation)
-│   ├── Projects.tsx       # Projects showcase (needs creation)
-│   ├── Experience.tsx     # Timeline (needs creation)
-│   ├── Contact.tsx        # Contact form (needs creation)
-│   └── Footer.tsx         # Footer (needs creation)
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-└── next.config.ts
+│   ├── Hero.tsx               # Hero section
+│   ├── About.tsx              # About section
+│   ├── TechStack.tsx          # Tech stack grid
+│   ├── Projects.tsx           # Projects showcase
+│   ├── Experience.tsx         # Timeline
+│   ├── Contact.tsx            # Contact section
+│   ├── Footer.tsx             # Footer
+│   ├── Navigation.tsx         # Header navigation
+│   └── ThemeProvider.tsx      # Dark/light mode
+├── hooks/
+│   └── useScrollAnimation.ts  # Scroll animation hook
+├── data/
+│   └── portfolio.json         # All portfolio data
+└── public/
+    ├── profile.jpg            # Current profile picture
+    └── profile.svg            # Default profile SVG
 ```
 
-## ✅ Already Created
+## 🎨 Customization
 
-- ✅ Next.js 15 setup with App Router
-- ✅ TypeScript configuration
-- ✅ Tailwind CSS with custom theme
-- ✅ Dark/Light mode toggle
-- ✅ Responsive navigation bar
-- ✅ Theme provider context
-- ✅ Custom gradient utilities
+### Update Portfolio Data
+Use the admin panel at `/admin` or manually edit `data/portfolio.json`:
 
-## 📝 Remaining Components to Create
-
-I've set up the foundation. You need to create these component files:
-
-### Hero.tsx
-```tsx
-'use client';
-export default function Hero() {
-  return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4">
-      {/* Hero content */}
-    </section>
-  );
+```json
+{
+  "profile": {
+    "name": "Your Name",
+    "title": "Your Title",
+    "bio": "Your bio...",
+    "email": "your@email.com",
+    "location": "Your Location",
+    "phone": "+1234567890",
+    "profilePicture": "/profile.jpg"
+  },
+  "projects": [...],
+  "experience": [...],
+  "techStack": {...}
 }
 ```
 
-### About.tsx, TechStack.tsx, Projects.tsx, Experience.tsx, Contact.tsx, Footer.tsx
-Follow the same pattern as Hero.tsx
+### Change Admin Password
+Edit `app/admin/page.tsx` line 15:
+```tsx
+const ADMIN_PASSWORD = 'your-new-password';
+```
 
-## 🎨 Features
-
-- ⚡ Next.js 15 with App Router
-- 🎯 TypeScript for type safety
-- 🎨 Tailwind CSS for styling
-- 🌓 Dark/Light mode toggle
-- 📱 Fully responsive design
-- 🚀 Optimized for production
-- 🔍 SEO-friendly
-
-## 🛠️ Technology Stack
-
-- **Framework**: Next.js 15
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Font**: Inter (Google Fonts)
-
-## 📦 Dependencies
-
-All required packages are in `package.json`:
-- next ^15.1.0
-- react ^19.0.0
-- react-dom ^19.0.0
-- typescript ^5.7.2
-- tailwindcss ^3.4.17
-- lucide-react ^0.468.0
+### Customize Colors
+Modify `tailwind.config.ts` for theme colors.
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### Deploy to Vercel (Recommended)
 ```bash
 npm i -g vercel
 vercel
 ```
 
-### Other Platforms
-- Build: `npm run build`
-- Start: `npm start`
-- Deploy the `.next` folder
+### Build for Production
+```bash
+npm run build
+npm start
+```
 
-## 📖 Next Steps
+### Environment Variables
+No environment variables required - portfolio data stored in `/data/portfolio.json`.
 
-1. Run `npm install` to install all dependencies
-2. Create the remaining component files
-3. Add your personal content and projects
-4. Customize colors in `tailwind.config.ts`
-5. Deploy to Vercel or your preferred hosting
+## 🔧 Development
 
-## 💡 Tips
+```bash
+# Run dev server (port 3000)
+npm run dev
 
-- Use `lucide-react` for icons
-- Follow the Tailwind CSS utility-first approach
-- Keep components modular and reusable
-- Use TypeScript interfaces for props
+# Build for production
+npm run build
+
+# Run production build
+npm start
+
+# Lint code
+npm run lint
+```
+
+## 📝 Admin Features
+
+- **Profile Management**: Update name, title, bio, contact info
+- **Profile Picture**: Upload, crop, and set profile image
+- **Project Management**: Add/edit/delete projects with details
+- **Experience Timeline**: Manage work experience entries
+- **Tech Stack**: Organize technologies by categories
+- **Auto-Save**: All changes save automatically (no manual save button)
+
+## 🎬 Animations
+
+- **Fade In**: Elements fade in as you scroll
+- **Slide**: Content slides from left/right
+- **Scale**: Items scale up on view
+- **Header**: Hides on scroll down, shows on scroll up
+- **Smooth Performance**: Optimized with IntersectionObserver
+
+## 📧 Contact
+
+- **Email**: kaleabtemesgen@icloud.com
+- **GitHub**: [github.com/kalua101](https://github.com/kalua101)
+- **LinkedIn**: [linkedin.com/in/kaleabtemesgen-0a62343a5](https://www.linkedin.com/in/kaleabtemesgen-0a62343a5)
+- **Location**: Addis Ababa, Ethiopia
+- **Phone**: +251 972 108 293
+
+## 📄 License
+
+This project is open source and available for personal use.
 
 ---
 
-Need help? The vanilla HTML/CSS/JS version is still available in the `portfolio` folder!
+Built with ❤️ by Kaleab Temesgen
