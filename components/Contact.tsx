@@ -13,10 +13,27 @@ export default function Contact() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert("Thank you for your message! I'll get back to you soon.");
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    
+    // Create email body with form data
+    const emailBody = `
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}
+    `.trim();
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:kaleabt06@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+    
+    // Clear form after a short delay
+    setTimeout(() => {
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    }, 500);
   };
 
   const socialLinks = [
