@@ -860,11 +860,17 @@ function MessagesSection() {
 
   useEffect(() => {
     loadMessages();
+    
+    // Auto-refresh every 2 seconds to catch new messages
+    const interval = setInterval(loadMessages, 2000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const loadMessages = () => {
     try {
       const data = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+      console.log('Loaded messages from localStorage:', data);
       setMessages(data);
       setLoading(false);
     } catch (error) {

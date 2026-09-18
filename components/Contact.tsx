@@ -24,10 +24,16 @@ export default function Contact() {
         id: Date.now(),
       };
 
+      console.log('Saving message:', newMessage);
+
       // Save to localStorage
       const existingMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+      console.log('Existing messages:', existingMessages);
+      
       existingMessages.unshift(newMessage);
       localStorage.setItem('contactMessages', JSON.stringify(existingMessages));
+      
+      console.log('Messages after save:', existingMessages);
 
       alert("✅ Thank you! Your message has been sent successfully.");
       setFormData({ name: '', email: '', subject: '', message: '' });
